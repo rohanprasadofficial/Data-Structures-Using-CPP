@@ -19,7 +19,7 @@ class Queue
     void EnQueue(int data)
     {
 
-        if (rear == MAX)
+        if (rear == MAX - 1)
         {
             cout << " Full Queue Exception " << endl;
         }
@@ -41,6 +41,11 @@ class Queue
         {
             cout << "Queue empty exception" << endl;
             return -1;
+        }
+        if (front == rear + 1)
+        {
+            front = -1;
+            rear = 1;
         }
         else
         {
