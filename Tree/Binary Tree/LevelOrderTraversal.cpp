@@ -12,53 +12,22 @@ struct BinaryTreeNode
     BinaryTreeNode *rightSubTree;
 };
 
-void PreorderIterative(BinaryTreeNode *t)
+void LevelOrderTraversal(BinaryTreeNode *t)
 {
 
-    stack<BinaryTreeNode *> s;
+    queue<BinaryTreeNode *> q;
 
-    while (!s.empty() || (t != NULL))
+    q.push(t);
+    while (!q.empty())
     {
 
-        if (t != NULL)
-        {
-
-            cout << t->data;
-            s.push(t);
-            t = t->leftSubTree;
-        }
-        else
-        {
-
-            t = s.top();
-            s.pop();
-            t = t->rightSubTree;
-        }
-    }
-}
-
-void Inorder(BinaryTreeNode *t)
-{
-
-    stack<BinaryTreeNode *> s;
-
-    while (!s.empty() || (t != NULL))
-    {
-
-        if (t == NULL)
-        {
-
-            t = s.top();
-            s.pop();
-            cout << t->data << " ";
-            t = t->rightSubTree;
-        }
-        else
-        {
-
-            s.push(t);
-            t = t->leftSubTree;
-        }
+        BinaryTreeNode *temp = q.front();
+        q.pop();
+        cout << temp->data << " ";
+        if (temp->leftSubTree)
+            q.push(temp->leftSubTree);
+        if (temp->rightSubTree)
+            q.push(temp->rightSubTree);
     }
 }
 
@@ -121,13 +90,9 @@ int main()
         }
     }
 
-    cout << "The Preorder Traversal is" << endl;
-    PreorderIterative(root);
-    cout << endl;
+    cout << "The Level Traversal is" << endl;
 
-    cout << "The Inorder Traversal is" << endl;
-    Inorder(root);
-    cout << endl;
+    LevelOrderTraversal(root);
 
     return 0;
 }
