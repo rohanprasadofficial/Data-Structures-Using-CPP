@@ -49,6 +49,56 @@ void DisplayPreOrder(Node *root)
     DisplayPreOrder(root->rightSubTree);
 }
 
+int leftMost(Node *root)
+{
+    while (root->leftSubTree->leftSubTree != NULL)
+    {
+        root = root->leftSubTree;
+    }
+    int r = root->data;
+    root->leftSubTree = NULL;
+    return r;
+}
+
+void deleteNode(Node *root, int data)
+{
+    if (root == NULL)
+        return;
+
+    if (root->data == data)
+    {
+
+        if (root->leftSubTree == NULL && root->rightSubTree == NULL)
+        {
+            free(root);
+        }
+        else if (root->leftSubTree == NULL && root->rightSubTree != NULL)
+        {
+            root = root->rightSubTree;
+        }
+        else if (root->rightSubTree == NULL && root->leftSubTree != NULL)
+        {
+            root = root->leftSubTree;
+        }
+        else
+        {
+
+            int p = leftMost(root);
+            root->data = p;
+
+            //Delete it and bring the rightmost left node out there
+        }
+    }
+    else if (root->data < data)
+    {
+        deleteNode(root->rightSubTree, data);
+    }
+    else
+    {
+        deleteNode(root->leftSubTree, data);
+    }
+}
+
 int main()
 {
     Node *root = NULL;
@@ -68,6 +118,9 @@ int main()
     Insert(&root, 15);
     Insert(&root, 25);
     Insert(&root, 40);
+    DisplayPreOrder(root);
+    cout << endl;
+    deleteNode(root, 30);
     DisplayPreOrder(root);
 
     return 0;
