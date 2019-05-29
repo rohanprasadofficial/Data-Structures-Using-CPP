@@ -37,6 +37,30 @@ void PreorderIterative(BinaryTreeNode *t)
     }
 }
 
+void Inorder(BinaryTreeNode *t)
+{
+
+    stack<BinaryTreeNode *> s;
+
+    while (!s.empty() || (t != NULL))
+    {
+
+        if (t == NULL)
+        {
+
+            t = s.top();
+            s.pop();
+            cout << t->data << " ";
+            t = t->rightSubTree;
+        }
+        else
+        {
+
+            s.push(t);
+            t = t->leftSubTree;
+        }
+    }
+}
 int main()
 {
 
@@ -98,6 +122,10 @@ int main()
 
     cout << "The Preorder Traversal is" << endl;
     PreorderIterative(root);
+    cout << endl;
+
+    cout << "The Inorder Traversal is" << endl;
+    Inorder(root);
     cout << endl;
 
     return 0;
