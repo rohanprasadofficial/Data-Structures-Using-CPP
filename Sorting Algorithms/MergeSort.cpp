@@ -15,9 +15,9 @@ void Merge(int arr[], int l, int mid, int h)
         L[i] = arr[l + i];
     for (j = 0; j < n2; j++)
         R[j] = arr[mid + 1 + j];
-    i = 0; // Initial index of first subarray
-    j = 0; // Initial index of second subarray
-    k = l; // Initial index of merged subarray
+    i = 0;
+    j = 0;
+    k = l;
     while (i < n1 && j < n2)
     {
         if (L[i] <= R[j])
@@ -33,8 +33,6 @@ void Merge(int arr[], int l, int mid, int h)
         k++;
     }
 
-    /* Copy the remaining elements of L[], if there 
-       are any */
     while (i < n1)
     {
         arr[k] = L[i];
@@ -42,8 +40,6 @@ void Merge(int arr[], int l, int mid, int h)
         k++;
     }
 
-    /* Copy the remaining elements of R[], if there 
-       are any */
     while (j < n2)
     {
         arr[k] = R[j];
